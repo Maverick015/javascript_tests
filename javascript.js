@@ -31,9 +31,6 @@ function battle() {
     let userSelection = getUserChoice();
     let computerSelection = getComputerChoice();
 
-    console.log(computerSelection);
-    console.log(userSelection);
-
     if (userSelection === "Rock" && computerSelection === 1) {
         console.log("The users rock bounces off the Opponent's rock, it's a tie.")
     }
