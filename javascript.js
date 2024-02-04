@@ -1,69 +1,83 @@
-// Prompt the user with three choices (Rock, paper, scissors)
-// User enters choice
-// Opponent chooses their weapon
-// Print message to show a battle occurs between user and opponent
-// Print winner
+let playerWins = 0;
+let computerWins = 0;
+const buttons = document.querySelectorAll('button');
+const scoreClass = document.querySelector(".score");
+scoreClass.textContent = "Player 0" + " | " + "Computer 0";
+const battleResult = document.querySelector(".battleResult");
 
-function getUserChoice() {
-    let userSelection = prompt("Choose your weapon:\n\nRock\nPaper\nScissors", "" );
-    console.log("You chose " + userSelection);
-    
-    return userSelection
-}
+buttons.forEach(function (button) {
+    button.addEventListener("click", function (event){
+
+        let buttonClass = event.target.classList[0];
+
+        if (playerWins < 5 && computerWins < 5){
+
+            scoreClass.textContent = "Player " + playerWins + " | " + "Computer " + computerWins;
+            battleResult.textContent = battle(buttonClass, getComputerChoice());
+        }
+
+        if (playerWins === 5 || computerWins === 5) {
+
+            scoreClass.textContent = "Player " + playerWins +
+                " | " + "Computer " + computerWins;
+
+            battleResult.textContent = ((playerWins > computerWins)
+                ? "You won the game!" : "You lost the game.");
+
+            battleResult.style.color = (playerWins > computerWins) ? "green" : "red";
+            battleResult.style.textShadow = "0 0 10px white";
+        }
+    });
+});
 
 function getComputerChoice() {
-    let computerSelection = Math.floor(Math.random() *3) + 1
-    if (computerSelection == 1) {
-        console.log("Your opponent chose Rock");
-    }
+    let number = Math.floor(Math.random() *3) + 1;
 
-    else if (computerSelection == 2) {
-        console.log("Your opponent chose Paper");
+    if (number === 1) {
+        return "rock"
+    } else if (number === 2) {
+        return "paper"
+    } else {
+        return "scissors"
     }
-
-    else {
-        console.log("Your opponent chose Scissors");
-    }
-    return computerSelection
 }
 
-function battle() {
-    let userSelection = getUserChoice();
-    let computerSelection = getComputerChoice();
+function battle(userSelection, computerSelection) {
 
-    if (userSelection === "Rock" && computerSelection === 1) {
-        console.log("The users rock bounces off the Opponent's rock, it's a tie.")
+    if (userSelection === "rock" && computerSelection === "rock") {
+        return "The users rock bounces off the Opponent's rock, it's a tie."
     }
-    else if (userSelection === "Rock" && computerSelection === 2) {
-        console.log("User's rock gets suffocated by the Opponent's paper, User loses the battle...")
+    else if (userSelection === "rock" && computerSelection === "paper") {
+        computerWins++;
+        return "User's rock gets suffocated by the Opponent's paper, User loses the battle..."
     }
-    else if (userSelection === "Rock" && computerSelection === 3) {
-        console.log("User's rock crushes the Opponent's scissors, User wins the battle!")
+    else if (userSelection === "rock" && computerSelection === "scissors") {
+        playerWins++;
+        return "User's rock crushes the Opponent's scissors, User wins the battle!"
     }
-    else if (userSelection === "Paper" && computerSelection === 1) {
-        console.log("User's paper suffocates the Opponent's rock, User wins the battle!")
+    else if (userSelection === "paper" && computerSelection === "rock") {
+        playerWins++;
+        return "User's paper suffocates the Opponent's rock, User wins the battle!"
     }
-    else if (userSelection === "Paper" && computerSelection === 2) {
-        console.log("The pieces of paper rub agains't each other without doing anything, it's a tie.")
+    else if (userSelection === "paper" && computerSelection === "paper") {
+        return "The pieces of paper rub agains't each other without doing anything, it's a tie."
     }
-    else if (userSelection === "Paper" && computerSelection === 3) {
-        console.log("User's paper gets sliced by the Opponent's scissors, User loses the battle...")
+    else if (userSelection === "paper" && computerSelection === "scissors") {
+        computerWins++;
+        return "User's paper gets sliced by the Opponent's scissors, User loses the battle..."
     }
-    else if (userSelection === "Scissors" && computerSelection === 1) {
-        console.log("User's scissors gets crushed by the Opponent's rock, User loses the battle...")
+    else if (userSelection === "scissors" && computerSelection === "rock") {
+        computerWins++;
+        return "User's scissors gets crushed by the Opponent's rock, User loses the battle..."
     }
-    else if (userSelection === "Scissors" && computerSelection === 2) {
-        console.log("User's scissors slices the Opponent's paper, User wins the battle!")
+    else if (userSelection === "scissors" && computerSelection === "paper") {
+        playerWins++;
+        return "User's scissors slices the Opponent's paper, User wins the battle!"
     }
-    else if (userSelection === "Scissors" && computerSelection === 3) {
-        console.log("The scissors... scissor? It's a tie.")
+    else if (userSelection === "scissors" && computerSelection === "scissors") {
+        return "The scissors... scissors? It's a tie."
     }
     else{
-        console.log("Wtf?")
+        return ("Wtf?")
     }
-
-
-
 }
-
-battle()

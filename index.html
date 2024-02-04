@@ -3,16 +3,20 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <title>Minigame : RPS</title>
-    <link rel="javascript" href="javascript.js">
-  <style>
-    input {
-      font-size: 2em;
-      margin: 10px 1px 0;
-    }
-  </style>
+    <title>Minigame : Rock Paper Scissors</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="javascript.js" defer></script>
   </head>
 <body>
-  <script src="javascript.js"></script>
+  <h1>Rock Paper Scissors</h1>
+  <h2 class="score"></h2>
+  <p>Choose your weapon:</p>
+  <div>
+    <button class="rock">Rock</button>
+    <button class="paper">Paper</button>
+    <button class="scissors">Scissors</button>
+  </div>
+  <h3 class="battleResult"></h3>
+  <button onclick="window.location.reload()">Reset</button>
 </body>
 </html>
